@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f5f6f2">
-  <meta name="description" content="An open-source workspace for AI agents to coordinate work, share context, and hand off tasks.">
+  <meta name="description" content="A browser-only demo for organizing sample AI agent tasks. No real agents are connected or executed.">
   <title>Mesh | Agent workspace</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,8 +36,8 @@
     .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-size: 16px; font-weight: 800; letter-spacing: .02em; }
     .brand-mark { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 8px; background: var(--ink); color: var(--green); }
     .brand-mark svg { width: 17px; height: 17px; }
-    .oss-tag, .eyebrow, .mono { font-family: "DM Mono", monospace; }
-    .oss-tag { padding: 4px 7px; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); font-size: 10px; font-weight: 400; letter-spacing: .06em; }
+    .project-tag, .eyebrow, .mono { font-family: "DM Mono", monospace; }
+    .project-tag { padding: 4px 7px; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); font-size: 10px; font-weight: 400; letter-spacing: .06em; }
     .nav { align-self: stretch; display: flex; align-items: stretch; gap: 27px; }
     .nav button { position: relative; border: 0; background: none; color: var(--muted); font-size: 12px; cursor: pointer; }
     .nav button.active { color: var(--ink); font-weight: 700; }
@@ -155,7 +155,7 @@
     @media (max-width: 450px) {
       .topbar { gap: 13px; }
       .brand { gap: 7px; font-size: 14px; }
-      .oss-tag { display: none; }
+      .project-tag { display: none; }
       .nav { gap: 11px; }
       .nav button { font-size: 9px; }
       .top-actions { gap: 7px; }
@@ -176,7 +176,7 @@
     <header class="topbar">
       <a class="brand" href="#tasks" aria-label="Mesh workspace home">
         <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 7.5 12 4l7 3.5v9L12 20l-7-3.5z"/><path d="m5.5 7.8 6.5 3.4 6.5-3.4M12 11.2v8.3"/></svg></span>
-        MESH <span class="oss-tag">OPEN SOURCE</span>
+        MESH <span class="project-tag">LOCAL DEMO</span>
       </a>
       <nav class="nav" aria-label="Main navigation">
         <button class="active" data-scroll="tasks">Workspace</button>
@@ -184,7 +184,7 @@
         <button data-scroll="activity">Activity</button>
       </nav>
       <div class="top-actions">
-        <span class="live"><i class="live-dot"></i><span id="onlineCount">3 agents online</span></span>
+        <span class="live"><i class="live-dot"></i><span id="onlineCount">3 demo agents online</span></span>
         <button class="icon-button" id="helpButton" aria-label="About Mesh" title="About Mesh">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.6 9a2.5 2.5 0 1 1 4.3 1.8c-1.1 1-1.9 1.3-1.9 2.7M12 17h.01"/></svg>
         </button>
@@ -197,13 +197,13 @@
         <div>
           <p class="eyebrow">Your agent workspace</p>
           <h1>Good work, shared.</h1>
-          <p class="subheading">One place for your agents to pick up, pass on, and finish work.</p>
+          <p class="subheading">A local-only prototype: sample agents organize tasks, but no AI work is executed.</p>
         </div>
         <button class="primary-button" id="newTaskButton"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>New task</button>
       </section>
 
       <section class="metrics" aria-label="Workspace overview">
-        <div class="metric"><span class="metric-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><path d="M3.5 19v-1.5A4.5 4.5 0 0 1 8 13h2a4.5 4.5 0 0 1 4.5 4.5V19M16 5.5a3 3 0 0 1 0 5.8M17 13h.5a4 4 0 0 1 4 4v2"/></svg></span><span class="metric-copy"><strong class="metric-value" id="metricAgents">3</strong><span class="metric-label">Agents online</span></span></div>
+        <div class="metric"><span class="metric-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><path d="M3.5 19v-1.5A4.5 4.5 0 0 1 8 13h2a4.5 4.5 0 0 1 4.5 4.5V19M16 5.5a3 3 0 0 1 0 5.8M17 13h.5a4 4 0 0 1 4 4v2"/></svg></span><span class="metric-copy"><strong class="metric-value" id="metricAgents">3</strong><span class="metric-label">Demo agents online</span></span></div>
         <div class="metric"><span class="metric-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h5M8 17h3"/></svg></span><span class="metric-copy"><strong class="metric-value" id="metricRunning">2</strong><span class="metric-label">Tasks in progress</span></span></div>
         <div class="metric"><span class="metric-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16.5 9"/></svg></span><span class="metric-copy"><strong class="metric-value" id="metricDone">8</strong><span class="metric-label">Completed today</span></span></div>
       </section>
@@ -223,7 +223,7 @@
         <section class="panel view-section" id="agents" aria-labelledby="agentHeading">
           <div class="panel-header"><h2 class="panel-title" id="agentHeading">Your agents <span class="panel-count" id="agentCount">03</span></h2><button class="text-button" id="addAgentButton">+ Add agent</button></div>
           <div class="agent-list" id="agentList"></div>
-          <div class="agent-footer"><span>Connected through local demo</span><span class="mono" id="agentOnlineFooter">3 / 3 online</span></div>
+          <div class="agent-footer"><span>Sample agents · browser only</span><span class="mono" id="agentOnlineFooter">3 / 3 online</span></div>
         </section>
       </div>
 
@@ -233,11 +233,11 @@
           <div class="activity-list" id="activityList" aria-live="polite"></div>
         </section>
         <aside class="panel" aria-labelledby="protocolHeading">
-          <div class="panel-header"><h2 class="panel-title" id="protocolHeading">Built for agents</h2><span class="oss-tag">MESH / 01</span></div>
+          <div class="panel-header"><h2 class="panel-title" id="protocolHeading">Built for agents</h2><span class="project-tag">MESH / 01</span></div>
           <div class="protocol-body">
             <p class="protocol-intro">A shared task is a shared contract. Give every agent the same context, clear ownership, and a place to hand results back.</p>
             <div class="protocol-code" aria-label="Example task format"><span class="key">task</span>:<br>&nbsp; <span class="key">goal</span>: <span class="string">"Review the release notes"</span><br>&nbsp; <span class="key">owner</span>: <span class="string">"researcher"</span><br>&nbsp; <span class="key">status</span>: <span class="string">"in_progress"</span><br>&nbsp; <span class="key">context</span>: <span class="string">"v2.4 draft"</span><br>&nbsp; <span class="key">result</span>: <span class="string">null</span></div>
-            <a class="protocol-link" href="https://github.com/" target="_blank" rel="noreferrer">Explore the open-source project <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></a>
+            <a class="protocol-link" href="https://github.com/Devly-Anas/InDaCloud" target="_blank" rel="noreferrer">View the project on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></a>
           </div>
         </aside>
       </div>
@@ -310,7 +310,7 @@
     function renderAgents() {
       const online = state.agents.filter((agent) => agent.online).length;
       document.getElementById('agentCount').textContent = String(state.agents.length).padStart(2, '0');
-      document.getElementById('onlineCount').textContent = `${online} agent${online === 1 ? '' : 's'} online`;
+      document.getElementById('onlineCount').textContent = `${online} demo agent${online === 1 ? '' : 's'} online`;
       document.getElementById('metricAgents').textContent = online;
       document.getElementById('agentOnlineFooter').textContent = `${online} / ${state.agents.length} online`;
       document.getElementById('agentList').innerHTML = state.agents.map((agent) => `<div class="agent-row"><span class="agent-avatar" style="--avatar-bg:${agent.bg};--avatar-fg:${agent.fg}">${escapeHtml(agent.initials)}</span><span><span class="agent-name">${escapeHtml(agent.name)}</span><span class="agent-type">${escapeHtml(agent.type)}</span></span><button class="text-button agent-state ${agent.online ? '' : 'paused'}" data-agent="${escapeHtml(agent.id)}" title="${agent.online ? 'Pause' : 'Resume'} ${escapeHtml(agent.name)}"><i></i>${agent.online ? 'Online' : 'Paused'}</button></div>`).join('') || '<div class="empty-state">No agents connected.</div>';
